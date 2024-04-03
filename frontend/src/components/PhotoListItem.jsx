@@ -5,7 +5,7 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 const PhotoListItem = (props) => {
-  
+
   const [isFavourite, setIsFavourite] = useState(false);
 
  // Define the onClick event handler function
@@ -19,7 +19,7 @@ const PhotoListItem = (props) => {
       
       <PhotoFavButton selected={isFavourite} onClick={toggleFavourite} />
 
-      <img className="photo-list__image" src={props.data.imageSource} alt="Photo taken by {props.data.username}" />
+      <img className="photo-list__image" src={props.data.imageSource} alt={`Photo taken by ${props.data.username}`} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={props.data.profile} alt="Profile" />
         <div className="photo-list__user-info">{props.data.username}
