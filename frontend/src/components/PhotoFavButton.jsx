@@ -3,17 +3,13 @@ import React, { useCallback, useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
- // Define the onClick event handler function
- const handleClick = () => {
-  // Implement desired functionality here
-  console.log('Favorite button clicked!');
-};
+function PhotoFavButton(props) {
+
 
   return (
-    <div className="photo-list__fav-icon" onClick={handleClick}>
+    <div className="photo-list__fav-icon" onClick={props.onClick}>
       <div className="photo-list__fav-icon-svg">
-        {/* Insert React */}
+        <FavIcon selected={props.selected}/>
       </div>
     </div>
   );
