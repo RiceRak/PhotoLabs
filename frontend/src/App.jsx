@@ -16,9 +16,17 @@ const sampleDataForPhotoListItem = {
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
+  // create an array with 3 values
+  const photos = [1, 2, 3];
+// Utilize the .map method to iterate through each element of the 'photos' array,
+// naming each element as 'photo'. For each iteration, invoke a callback function
+// to create a 'PhotoListItem' component, with a unique key assigned to each photo.
+// 'sampleDataForPhotoListItem' is to be a constant or variable containing
+// relevant data for rendering the 'PhotoListItem' component.
+  const renderedPhotos = photos.map((photo) => <PhotoListItem key={photo} data={sampleDataForPhotoListItem} />)
   return (
     <div className="App">
-      <PhotoListItem data={sampleDataForPhotoListItem}/>
+      {renderedPhotos}
     </div>
   );
 };
