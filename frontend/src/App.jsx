@@ -2,6 +2,7 @@ import React from 'react';
 
 import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
+import PhotoList from 'components/PhotoList';
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <div className="App">
       {/* {renderedPhotos} */}
+      <PhotoList />
     </div>
   );
 };
