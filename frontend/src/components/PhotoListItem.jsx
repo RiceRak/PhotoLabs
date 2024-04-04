@@ -15,7 +15,7 @@ const PhotoListItem = ({ data }) => {
 
   return (
     <article className="photo-list__item">      
-      <PhotoFavButton selected={isFavourite} onClick={toggleFavourite} />
+      <PhotoFavButton selected={isFavourite} toggleFavourite={toggleFavourite} />
       <img className="photo-list__image" src={urls.regular} alt={`Photo taken by ${user.username}`} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={user.profile} alt="Profile" />
