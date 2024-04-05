@@ -5,10 +5,10 @@ import PhotoList from 'components/PhotoList';
 import TopNavigation from 'components/TopNavigationBar';
 
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
   return (
     <div className="home-route">
-      <TopNavigation />
+      <TopNavigation topics={props.topics}/>
       <PhotoList />
     </div>
   );
