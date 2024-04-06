@@ -4,7 +4,7 @@ import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = (props) => {
-  const { showModal, setShowModal } = props
+  const { setShowModal } = props
 
   const closeModal = () => {
     setShowModal(false);
