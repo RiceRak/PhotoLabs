@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-
-const PhotoListItem = ({ data }) => {
-  const { user, urls, location } = data;
-  const [isFavourite, setIsFavourite] = useState(false);
-
-  // Define the onClick event handler function
-  const toggleFavourite = () => {
-    setIsFavourite(!isFavourite);
-  };
+const PhotoListItem = (props) => {
+  const { user, urls, location, id } = props.data;
+  const { isFavourite, toggleFavourite } = props.favStateControl;
 
   return (
     <article className="photo-list__item">      
-      <PhotoFavButton selected={isFavourite} toggleFavourite={toggleFavourite} />
+      <PhotoFavButton selected={isFavourite.includes(id)} toggleFavourite={() => toggleFavourite(id)} />
       <img className="photo-list__image" src={urls.regular} alt={`Photo taken by ${user.username}`} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={user.profile} alt="Profile" />
