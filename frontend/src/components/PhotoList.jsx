@@ -4,12 +4,14 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
+  const { photos, favStateControl } = props;
+
   return (
-<ul className="photo-list">
-  {props.photos.map(item => (
-    <PhotoListItem key={item.id} data={item} />
-  ))}
-</ul>
+    <ul className="photo-list">
+      {photos.map(item => (
+        <PhotoListItem key={item.id} data={item} favStateControl={favStateControl} />
+      ))}
+    </ul>
   );
 };
 
