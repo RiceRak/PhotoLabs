@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute topics={topics} photos={photos} clickOnPhoto={clickOnPhoto}/>
-      {showModal && <PhotoDetailsModal />}
+      {showModal && <PhotoDetailsModal showModal={showModal} setShowModal={setShowModal}/>}
     </div>
   );
 };
