@@ -6,11 +6,12 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = (props) => {
   const { user, urls, location, id } = props.data;
   const { isFavourite, toggleFavourite } = props.favStateControl;
+  const { clickOnPhoto } = props
 
   return (
-    <article className="photo-list__item">      
+    <article className="photo-list__item">
       <PhotoFavButton selected={isFavourite.includes(id)} toggleFavourite={() => toggleFavourite(id)} />
-      <img className="photo-list__image" src={urls.regular} alt={`Photo taken by ${user.username}`} />
+      <img className="photo-list__image" src={urls.regular} alt={`Photo taken by ${user.username}`} onClick={clickOnPhoto} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={user.profile} alt="Profile" />
         <div className="photo-list__user-info">
