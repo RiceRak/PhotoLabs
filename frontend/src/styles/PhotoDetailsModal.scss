@@ -11,6 +11,12 @@
   border-radius: 12px;
 }
 
+.photo-list-modal_item {
+  background-color: white;
+  margin-top: 5px;
+  margin-left: 35px;
+}
+
 .photo-details-modal__close-button {
   background-color: white;
   border: none;
@@ -25,7 +31,7 @@
 }
 
 .photo-details-modal__images {
-  margin-left: 36px;
+  margin: 36px;
   margin-top: 8px;
 }
 
@@ -55,6 +61,7 @@
   margin-top: 24px;
   margin-bottom: 24px;
   width: 90%;
+  margin-left: 35px;
 }
 
 .photo-details-modal__photographer-location {

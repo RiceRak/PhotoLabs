@@ -5,30 +5,14 @@ import PhotoList from 'components/PhotoList';
 import TopNavigation from 'components/TopNavigationBar';
 
 const HomeRoute = (props) => {
+const { clickOnPhoto, favStateControl } = props;
+const { isFavourite } = favStateControl;
 
-  const [isFavourite, setIsFavourite] = useState([]);
-
-  const toggleFavourite = (photoId) => {
-    setIsFavourite(prev => {
-      if (!prev.includes(photoId)) {
-        return [
-          ...prev,
-          photoId
-        ]
-      }
-      return prev.filter(element => element !== photoId)
-    });
-  };
-
-  const favStateControl = {
-    isFavourite,
-    toggleFavourite,
-  };
 
   return (
     <div className="home-route">
       <TopNavigation topics={props.topics} favouriteCount={isFavourite.length} />
-      <PhotoList photos={props.photos} favStateControl={favStateControl} clickOnPhoto={props.clickOnPhoto}/>
+      <PhotoList photos={props.photos} favStateControl={favStateControl} clickOnPhoto={clickOnPhoto}/>
     </div>
   );
 };
