@@ -25,15 +25,18 @@ const reducer = (state, action) => {
         return { ...state, favourites: state.favourites.filter(element => element !== action.payload) }
       }
       return { ...state, favourites: [...state.favourites, action.payload] }
-    
+
     case HIDE_MODAL:
-      return { ...state, showModal: false}
+      return { ...state, showModal: false }
+
+    default:
+      throw new Error(`Unsupported action type: ${action.type}`);
   }
 }
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  
+
   const setPhotos = (photos) => {
     dispatch({
       type: SET_PHOTOS,
