@@ -9,13 +9,11 @@ import useApplicationData from './hooks/useApplicationData';
 
 const App = () => {
   const {
-    isFavourite,
-    showModal,
-    setShowModal,
-    selectedPhoto,
+    state,
+    setPhotos,
+    hideModal,
     toggleFavourite,
     clickOnPhoto,
-    favStateControl,
   } = useApplicationData();
 
   return (
@@ -24,13 +22,15 @@ const App = () => {
         topics={topics} 
         photos={photos} 
         clickOnPhoto={clickOnPhoto} 
-        favStateControl={favStateControl} 
+        toggleFavourite={toggleFavourite}
+        favourites={state.favourites}
       />
-      {showModal && 
+      {state.showModal && 
         <PhotoDetailsModal 
-          setShowModal={setShowModal} 
-          selectedPhoto={selectedPhoto} 
-          favStateControl={favStateControl} 
+          hideModal={hideModal}
+          selectedPhoto={state.selectedPhoto} 
+          toggleFavourite={toggleFavourite}
+          favourites={state.favourites}
           clickOnPhoto={clickOnPhoto} />}
     </div>
   );

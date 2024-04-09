@@ -6,8 +6,7 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = (props) => {
 
   const { user, urls, location, id } = props.data;
-  const { isFavourite, toggleFavourite } = props.favStateControl;
-  const { clickOnPhoto, homeRoute } = props;
+  const { clickOnPhoto, homeRoute, toggleFavourite, favourites } = props;
 
   const articleClassName = homeRoute ? "photo-list__item" : "photo-list-modal_item";
   const imgClassName = homeRoute ? "photo-list__image" : "photo-details-modal__image";
@@ -18,7 +17,7 @@ const PhotoListItem = (props) => {
 
   return (
     <article className={articleClassName}>
-      <PhotoFavButton selected={isFavourite.includes(id)} toggleFavourite={() => toggleFavourite(id)} />
+      <PhotoFavButton selected={favourites.includes(id)} toggleFavourite={() => toggleFavourite(id)} />
       <img className={imgClassName} src={urls.regular} alt={`Photo taken by ${user.username}`} onClick={() => clickOnPhoto(props.data)} />
       <div className={userDetails}>
         <img className={userProfile} src={user.profile} alt="Profile" />

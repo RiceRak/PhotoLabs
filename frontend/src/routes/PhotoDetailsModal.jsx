@@ -6,22 +6,16 @@ import PhotoListItem from 'components/PhotoListItem';
 import PhotoList from 'components/PhotoList';
 
 const PhotoDetailsModal = (props) => {
-  const { setShowModal, selectedPhoto, favStateControl, clickOnPhoto } = props
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  console.log(selectedPhoto);
+  const { selectedPhoto, favourites, toggleFavourite,clickOnPhoto, hideModal } = props
 
   return (
     <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button" onClick={closeModal}>
+      <button className="photo-details-modal__close-button" onClick={hideModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <PhotoListItem data={selectedPhoto} favStateControl={favStateControl}/>
+      <PhotoListItem data={selectedPhoto} toggleFavourite={toggleFavourite} favourites={favourites}/>
       <div className="photo-details-modal__header">Similar Photos</div>
-      <div className="photo-details-modal__images"> <PhotoList photos={Object.values(selectedPhoto.similar_photos)} favStateControl={favStateControl} clickOnPhoto={clickOnPhoto}/> </div>
+      <div className="photo-details-modal__images"> <PhotoList photos={Object.values(selectedPhoto.similar_photos)} toggleFavourite={toggleFavourite} favourites={favourites} clickOnPhoto={clickOnPhoto}/> </div>
     </div>
   )
 };
