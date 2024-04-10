@@ -1,14 +1,11 @@
 import React, { useReducer, useEffect } from 'react';
 
-import topics from '../mocks/topics'
-import photos from '../mocks/photos'
-
 const initialState = {
   favourites: [],
   showModal: false,
   selectedPhoto: null,
-  photos,
-  topics,
+  photoData: [],
+  topicData: [],
 }
 
 const SET_SELECTED_PHOTO = "SET_SELECTED_PHOTO"
@@ -44,6 +41,7 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  
 
   const setTopics = (topics) => {
     dispatch({
