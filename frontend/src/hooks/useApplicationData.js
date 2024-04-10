@@ -1,14 +1,19 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
+
+import topics from '../mocks/topics'
+import photos from '../mocks/photos'
 
 const initialState = {
   favourites: [],
   showModal: false,
   selectedPhoto: null,
-  photos: [],
+  photos,
+  topics,
 }
 
 const SET_SELECTED_PHOTO = "SET_SELECTED_PHOTO"
 const SET_PHOTOS = "SET_PHOTOS"
+const SET_TOPICS = "SET_TOPICS"
 const TOGGLE_FAVOURITE = "TOGGLE_FAVOURITES"
 const HIDE_MODAL = "HIDE_MODAL"
 
@@ -16,6 +21,9 @@ const reducer = (state, action) => {
   switch (action.type) {
     case SET_PHOTOS:
       return { ...state, photos: action.payload }
+
+    case SET_TOPICS:
+      return { ...state, tpoics: action.payload }
 
     case SET_SELECTED_PHOTO:
       return { ...state, selectedPhoto: action.payload, showModal: true }
@@ -36,6 +44,13 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  const setTopics = (topics) => {
+    dispatch({
+      type: SET_TOPICS,
+      payload: topics,
+    });
+  }
 
   const setPhotos = (photos) => {
     dispatch({
