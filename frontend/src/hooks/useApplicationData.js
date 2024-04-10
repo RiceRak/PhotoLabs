@@ -17,10 +17,10 @@ const HIDE_MODAL = "HIDE_MODAL"
 const reducer = (state, action) => {
   switch (action.type) {
     case SET_PHOTOS:
-      return { ...state, photos: action.payload }
+      return { ...state, photoData: action.payload }
 
     case SET_TOPICS:
-      return { ...state, tpoics: action.payload }
+      return { ...state, topicData: action.payload }
 
     case SET_SELECTED_PHOTO:
       return { ...state, selectedPhoto: action.payload, showModal: true }
@@ -42,6 +42,25 @@ const reducer = (state, action) => {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
   
+  useEffect(() => {
+    fetch('api/photos')
+    .then((res) => res.json())
+    .then((data) => dispatch({
+      type: SET_PHOTOS,
+      payload: data
+    }))
+    .catch((error) => console.error('Error fetching photos:', error));
+  }, []);
+
+  useEffect(() => {
+    fetch('api/topics')
+    .then((res) => res.json())
+    .then((data) => dispatch({
+      type: SET_TOPICS,
+      payload: data
+    }))
+    .catch((error) => console.error('Error fetching topics:', error));
+  }, []);
 
   const setTopics = (topics) => {
     dispatch({
@@ -78,6 +97,8 @@ const useApplicationData = () => {
   }
 
   return {
+    photoData: state.photoData,
+    topicData: state.topicData,
     setPhotos,
     hideModal,
     toggleFavourite,
