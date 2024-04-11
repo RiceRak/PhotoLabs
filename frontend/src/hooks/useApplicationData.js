@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type';
 import React, { useReducer, useEffect } from 'react';
 
 const initialState = {
@@ -6,6 +7,7 @@ const initialState = {
   selectedPhoto: null,
   photoData: [],
   topicData: [],
+  clickOnTopic: null,
 }
 
 const SET_SELECTED_PHOTO = "SET_SELECTED_PHOTO"
@@ -13,9 +15,15 @@ const SET_PHOTOS = "SET_PHOTOS"
 const SET_TOPICS = "SET_TOPICS"
 const TOGGLE_FAVOURITE = "TOGGLE_FAVOURITES"
 const HIDE_MODAL = "HIDE_MODAL"
+const GET_PHOTOS_BY_TOPIC = "GET_PHOTOS_BY_TOPIC"
 
 const reducer = (state, action) => {
+
+
   switch (action.type) {
+    case GET_PHOTOS_BY_TOPIC:
+      return { ...state, clickOnTopic: action.payload }
+
     case SET_PHOTOS:
       return { ...state, photoData: action.payload }
 
@@ -41,13 +49,30 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  const setTopicFilter = (topicId) => {
+    console.log('set topic filter before dispatch:', topicId)
+    dispatch({
+      type: GET_PHOTOS_BY_TOPIC,
+      payload: topicId
+    })
+  }
+
+  useEffect(() => {
+    const path = `api/topics/photos/${state.clickOnTopic}`
+
+    fetch(path)
+    .then((res) => res.json())
+    // issue happens here!!!
+    .then((data) => console.log('useEffect Data:', data))
+  }, [state.clickOnTopic])
   
   useEffect(() => {
     fetch('api/photos')
     .then((res) => res.json())
     .then((data) => dispatch({
       type: SET_PHOTOS,
-      payload: data
+      payload: data,
     }))
     .catch((error) => console.error('Error fetching photos:', error));
   }, []);
@@ -96,6 +121,8 @@ const useApplicationData = () => {
     })
   }
 
+  console.log('useAD state:', state)
+
   return {
     photoData: state.photoData,
     topicData: state.topicData,
@@ -104,6 +131,7 @@ const useApplicationData = () => {
     toggleFavourite,
     clickOnPhoto,
     state,
+    setTopicFilter
   };
 }
 

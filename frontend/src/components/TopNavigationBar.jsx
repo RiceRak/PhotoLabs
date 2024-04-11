@@ -6,12 +6,12 @@ import FavBadge from './FavBadge';
 
 const TopNavigation = (props) => {
   
-  const { topics, favouriteCount } = props;
+  const { topics, favouriteCount, setTopicFilter } = props;
 
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs </span>
-      <TopicList topics={topics}/>
+      <TopicList topics={topics} setTopicFilter={setTopicFilter} />
       <FavBadge isFavPhotoExist={favouriteCount} selected={true} />
       <div className="notification">
           You have {favouriteCount} favourite photo(s)

@@ -14,11 +14,17 @@ const App = () => {
     hideModal,
     toggleFavourite,
     clickOnPhoto,
+    setTopicFilter,
   } = useApplicationData();
+
+  console.log('App PhotoData:', photoData)
+
+  console.log('State.photoData APP:', state.photoData)
 
   return (
     <div className="App">
       <HomeRoute 
+        setTopicFilter={setTopicFilter}
         topics={topicData} 
         photos={photoData} 
         clickOnPhoto={clickOnPhoto} 
