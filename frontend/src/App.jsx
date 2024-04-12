@@ -17,9 +17,6 @@ const App = () => {
     setTopicFilter,
   } = useApplicationData();
 
-  console.log('App PhotoData:', photoData)
-
-  console.log('State.photoData APP:', state.photoData)
 
   return (
     <div className="App">

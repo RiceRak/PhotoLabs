@@ -17,8 +17,9 @@ const TOGGLE_FAVOURITE = "TOGGLE_FAVOURITES"
 const HIDE_MODAL = "HIDE_MODAL"
 const GET_PHOTOS_BY_TOPIC = "GET_PHOTOS_BY_TOPIC"
 
-const reducer = (state, action) => {
 
+
+const reducer = (state, action) => {
 
   switch (action.type) {
     case GET_PHOTOS_BY_TOPIC:
@@ -51,7 +52,6 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const setTopicFilter = (topicId) => {
-    console.log('set topic filter before dispatch:', topicId)
     dispatch({
       type: GET_PHOTOS_BY_TOPIC,
       payload: topicId
@@ -59,23 +59,33 @@ const useApplicationData = () => {
   }
 
   useEffect(() => {
-    const path = `api/topics/photos/${state.clickOnTopic}`
+    console.log('inside useEffect 1')
+
+    const path = state.clickOnTopic ? `api/topics/photos/${state.clickOnTopic}` : 'api/photos';
 
     fetch(path)
     .then((res) => res.json())
     // issue happens here!!!
-    .then((data) => console.log('useEffect Data:', data))
-  }, [state.clickOnTopic])
+    .then((data) => {
+      console.log('inside useEffect 1 .then:', data)
+      dispatch({
+        type: SET_PHOTOS,
+        payload: data,
+      })})  
+    }, [state.clickOnTopic])
   
-  useEffect(() => {
-    fetch('api/photos')
-    .then((res) => res.json())
-    .then((data) => dispatch({
-      type: SET_PHOTOS,
-      payload: data,
-    }))
-    .catch((error) => console.error('Error fetching photos:', error));
-  }, []);
+  // useEffect(() => {
+  //   console.log('inside useEffect 2')
+  //   fetch('api/photos')
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     console.log('inside useEffect 2 .then', data)
+  //   dispatch({
+  //     type: SET_PHOTOS,
+  //     payload: data,
+  //   })})
+  //   .catch((error) => console.error('Error fetching photos:', error));
+  // }, []);
 
   useEffect(() => {
     fetch('api/topics')
@@ -120,8 +130,6 @@ const useApplicationData = () => {
       type: HIDE_MODAL,
     })
   }
-
-  console.log('useAD state:', state)
 
   return {
     photoData: state.photoData,
