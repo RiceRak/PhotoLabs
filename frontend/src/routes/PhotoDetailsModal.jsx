@@ -13,7 +13,11 @@ const PhotoDetailsModal = (props) => {
       <button className="photo-details-modal__close-button" onClick={hideModal}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <PhotoListItem data={selectedPhoto} toggleFavourite={toggleFavourite} favourites={favourites}/>
+      <PhotoListItem 
+        data={selectedPhoto} 
+        toggleFavourite={toggleFavourite} 
+        favourites={favourites}
+        />
       <div className="photo-details-modal__header">Similar Photos</div>
       <div className="photo-details-modal__images"> <PhotoList photos={Object.values(selectedPhoto.similar_photos)} toggleFavourite={toggleFavourite} favourites={favourites} clickOnPhoto={clickOnPhoto}/> </div>
     </div>

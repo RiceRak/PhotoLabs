@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/TopicListItem.scss";
 
 const TopicListItem = (props) => {
-  const { slug, title, id } = props.data;
+  const { title, id } = props.data;
   const { setTopicFilter } = props;
 
   return (

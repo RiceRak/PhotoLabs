@@ -17,7 +17,10 @@ const PhotoListItem = (props) => {
 
   return (
     <article className={articleClassName}>
-      <PhotoFavButton selected={favourites.includes(id)} toggleFavourite={() => toggleFavourite(id)} />
+      <PhotoFavButton
+        selected={favourites.includes(id)}
+        toggleFavourite={() => toggleFavourite(id)}
+      />
       <img className={imgClassName} src={urls.regular} alt={`Photo taken by ${user.username}`} onClick={() => clickOnPhoto(props.data)} />
       <div className={userDetails}>
         <img className={userProfile} src={user.profile} alt="Profile" />
