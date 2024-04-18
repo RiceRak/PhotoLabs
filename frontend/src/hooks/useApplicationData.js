@@ -1,5 +1,6 @@
 import { type } from '@testing-library/user-event/dist/type';
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
+
 
 const initialState = {
   favourites: [],
@@ -50,6 +51,7 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(true);
 
   const setTopicFilter = (topicId) => {
     dispatch({
@@ -61,7 +63,7 @@ const useApplicationData = () => {
   useEffect(() => {
 
     const path = state.clickOnTopic ? `api/topics/photos/${state.clickOnTopic}` : 'api/photos';
-
+setTimeout(() => {
     fetch(path)
       .then((res) => res.json())
       .then((data) => {
@@ -70,32 +72,24 @@ const useApplicationData = () => {
           payload: data,
         })
       })
+    }, 0);
   }, [state.clickOnTopic])
 
 
   useEffect(() => {
-    fetch('api/topics')
+    setTimeout(() => {
+      fetch('api/topics')
       .then((res) => res.json())
-      .then((data) => dispatch({
-        type: SET_TOPICS,
-        payload: data
-      }))
+      .then((data) => {
+        dispatch({
+          type: SET_TOPICS,
+          payload: data
+        });
+        setIsLoading(false);
+      })
       .catch((error) => console.error('Error fetching topics:', error));
+    }, 0);
   }, []);
-
-  const setTopics = (topics) => {
-    dispatch({
-      type: SET_TOPICS,
-      payload: topics,
-    });
-  }
-
-  const setPhotos = (photos) => {
-    dispatch({
-      type: SET_PHOTOS,
-      payload: photos,
-    });
-  }
 
   const toggleFavourite = (photoId) => {
     dispatch({
@@ -118,14 +112,12 @@ const useApplicationData = () => {
   }
 
   return {
-    photoData: state.photoData,
-    topicData: state.topicData,
-    setPhotos,
     hideModal,
     toggleFavourite,
     clickOnPhoto,
     state,
-    setTopicFilter
+    setTopicFilter,
+    isLoading
   };
 }
 

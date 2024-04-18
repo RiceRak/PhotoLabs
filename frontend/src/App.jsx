@@ -7,31 +7,29 @@ import useApplicationData from './hooks/useApplicationData';
 
 const App = () => {
   const {
-    topicData,
-    photoData,
     state,
-    setPhotos,
     hideModal,
     toggleFavourite,
     clickOnPhoto,
     setTopicFilter,
+    isLoading
   } = useApplicationData();
-
 
   return (
     <div className="App">
-      <HomeRoute 
+      <HomeRoute
         setTopicFilter={setTopicFilter}
-        topics={topicData} 
-        photos={photoData} 
-        clickOnPhoto={clickOnPhoto} 
+        topics={state.topicData}
+        photos={state.photoData}
+        clickOnPhoto={clickOnPhoto}
         toggleFavourite={toggleFavourite}
         favourites={state.favourites}
+        isLoading={isLoading}
       />
-      {state.showModal && 
-        <PhotoDetailsModal 
+      {state.showModal &&
+        <PhotoDetailsModal
           hideModal={hideModal}
-          selectedPhoto={state.selectedPhoto} 
+          selectedPhoto={state.selectedPhoto}
           toggleFavourite={toggleFavourite}
           favourites={state.favourites}
           clickOnPhoto={clickOnPhoto} />}

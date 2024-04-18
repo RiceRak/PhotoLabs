@@ -5,7 +5,7 @@ import PhotoList from 'components/PhotoList';
 import TopNavigation from 'components/TopNavigationBar';
 
 const HomeRoute = (props) => {
-  const { clickOnPhoto, favourites, toggleFavourite, setTopicFilter, photos } = props;
+  const { clickOnPhoto, favourites, toggleFavourite, setTopicFilter, photos, isLoading } = props;
 
 
 
@@ -15,6 +15,7 @@ const HomeRoute = (props) => {
         topics={props.topics}
         favouriteCount={favourites.length}
         setTopicFilter={setTopicFilter}
+        isLoading={isLoading}
       />
       <PhotoList
         photos={photos}
